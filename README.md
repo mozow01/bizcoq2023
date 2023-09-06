@@ -8,17 +8,11 @@ szerda 16-18, H405a
 
 A funkcionális programozási paradigma áttekinthetővé, a tiszta típusrendszer bolondbiztossá teszi a programozási nyelveket (pl. Haskell, Rust). A Coq nyelv és társai (Lean, Agda, Idris) azzal fejelik meg ezt, hogy olyan erős a típusrendszerük, hogy kifejezhetők bennük a legkülönbözőbb bonyolultságú matematikai állítások is, konkrétan az egész matematika beléjük fér tételestül, bizonyításostul. Ezzel viszont nem csak tételbizonyításra, hanem kritikus informatikai rendszerek modellezésére és formális hitelesítésére is alkalmasak. A kurzus során informatikai, logikai ill. matematikai példákon keresztül nyerünk betekintést a Coq és Lean nyelvek programozásába. 
 
-https://github.com/mozow01/bizcoq2021
-
 Molnár Zoltán Gábor,
 
 BME TTK Algebra és Geometria Tsz., 
 
 mozow@math.bme.hu
-
-
-
-
 
 ## Bővebben
 
