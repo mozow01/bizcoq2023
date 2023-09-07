@@ -31,7 +31,7 @@ induction b1, b2, b3.
 all: compute; reflexivity.
 Qed.
 ````
-**Lean3 kód:**
+**Lean3 kód, itt vannak kommentek is, mert jobban különbözik a Coq-tól így ez magyarázatra szorul **
 
 ````lean
 -- "Boole" mert itt is van beépített "bool" típus
