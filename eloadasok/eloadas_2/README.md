@@ -1,5 +1,7 @@
 # Nyers kódok
 
+## Coq
+
 ````coq
 (*
 
@@ -90,4 +92,10 @@ intro.
 elim H0.
 all: intuition.
 Qed.
+````
+
+## Lean 3
+
+````lean
+
 ````
