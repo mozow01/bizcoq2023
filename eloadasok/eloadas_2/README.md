@@ -122,14 +122,14 @@ end
 
 Azt hogy érvényesek vagy sem, nem dönti el a firstorder taktika, de segít, mert ha nem fut le, akkor gyanakodhatunk, hogy nem érvényesek az intuicionista logikában. 
 
-Segítség: ha klasszikussá akarjuk tenni, próbálkozzunk az "(~ A \/ A) -> ..." plusz feltétellel az állítás előtt!
+Segítség: ha klasszikussá akarjuk tenni, próbálkozzunk az "````(~ A \/ A) -> ...````" plusz feltétellel az állítás előtt!
 
 A CoqIDE is tud latex betűket csinálni, pl: \Xi és utána egy shift+space egy nagy Xi-t csinál.
 
+````
 1. forall A B C : Prop, A \/ (B /\ C) -> (A \/ B) /\ (A \/ C)
 2. forall A B C : Prop, ~ A \/ ~ B -> ~ (A /\ B)
 3. forall A B C : Prop, ~ (A /\ B) -> ~ A \/ ~ B
 4. forall A B C : Prop, ~ (A \/ B) -> ~ A /\ ~ B
-
+````
 Lean-ben is megpróbálhatjuk, erre van példa.
-6. 
