@@ -1,6 +1,6 @@
 # My Type: Boole
 
-**Coq:**
+## Coq
 
 ````coq
 Inductive Boole : Set :=
@@ -31,7 +31,9 @@ induction b1, b2, b3.
 all: compute; reflexivity.
 Qed.
 ````
-**Lean3 kód, itt vannak kommentek is, mert jobban különbözik a Coq-tól így ez magyarázatra szorul **
+## Lean3 kód 
+
+Itt vannak kommentek is, mert jobban különbözik a Coq-tól, mint a Lean 4, így magyarázatra szorul
 
 ````lean
 -- "Boole" mert itt is van beépített "bool" típus
@@ -83,7 +85,7 @@ end
 #print dist_1
 ````
 
-**Lean4 kód:**
+## Lean4 kód
 
 ````lean
 inductive Boole : Type
