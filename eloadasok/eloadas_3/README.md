@@ -16,3 +16,7 @@ inhabited U -> ((forall x : U, P x ) \/ (forall x : U, ~ P x))
 -> (forall x : U, P x) \/ (exists x : U, ~ P x).
 ````
 
+````coq
+Lemma deM_4 : forall (U : Type) (P : U -> Prop), inhabited U -> ((exists x : U, P x) \/ ~ (exists x : U, P x)) -> ~ (forall x : U, ~ P x)-> (exists x : U, P x).
+````
+
