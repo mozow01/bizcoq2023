@@ -26,12 +26,15 @@ inhabited U -> ((forall x : U, P x ) \/ (forall x : U, ~ P x))
 3.
 
 ````coq
-Lemma ex_dist_1 : forall (U : Type) (A B : U -> Prop), (exists x, A x \/ B x)-> (exists x, A x) \/ (exists x, B x).
+Lemma ex_dist_1 : forall (U : Type) (A B : U -> Prop),
+(exists x, A x \/ B x) -> (exists x, A x) \/ (exists x, B x).
 ````
 
 4.
 
 ````coq
-Lemma deM_quant_4 : forall (U : Type) (P : U -> Prop), inhabited U -> ((exists x : U, P x) \/ ~ (exists x : U, P x)) -> ~ (forall x : U, ~ P x)-> (exists x : U, P x).
+Lemma deM_quant_4 : forall (U : Type) (P : U -> Prop),
+inhabited U -> ((exists x : U, P x) \/ ~ (exists x : U, P x))
+-> ~ (forall x : U, ~ P x)-> (exists x : U, P x).
 ````
 
