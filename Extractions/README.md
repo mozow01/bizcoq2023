@@ -6,6 +6,8 @@ Lényeges, hogy ha a .ts-t akarjuk módosítani, ahhoz kell node és node-typscr
 
 ## Bináris fák levélhossza
 
+Coq kód:
+
 ````coq
 Inductive tree : Set :=
   | leaf : tree
@@ -17,6 +19,8 @@ Fixpoint treeLength (t : tree) {struct t} : nat :=
     | node t1 t2 => (treeLength t1) + (treeLength t2)
   end.
 ````
+
+TypeScript kód:
 
 ````typescript
 
