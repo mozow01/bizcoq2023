@@ -23,7 +23,6 @@ Fixpoint treeLength (t : tree) {struct t} : nat :=
 TypeScript kód:
 
 ````typescript
-
 // Címke nélküli bináris fák típusa, "levélhossz" függvény
 //
 // TS-ben nincs induktív típus, de van olyan, hogy 
@@ -34,12 +33,13 @@ type Tree =
 
 // A treeLength függvény összeszámolja a leveleket
 function treeLength(tree: Tree): number {
-  if (tree.tag === 'leaf') {
-    return 1; 
-  } else {
-    return treeLength(tree.left) + treeLength(tree.right);
+  switch (tree.tag) {
+    case 'leaf':
+      return 1; 
+    case 'node':
+      return treeLength(tree.left) + treeLength(tree.right);
+    }
   }
-}
 
 // tree1: leaf
 //
