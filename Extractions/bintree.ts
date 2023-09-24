@@ -9,12 +9,13 @@ type Tree =
 
 // A treeLength függvény összeszámolja a leveleket
 function treeLength(tree: Tree): number {
-  if (tree.tag === 'leaf') {
-    return 1; 
-  } else {
-    return treeLength(tree.left) + treeLength(tree.right);
+  switch (tree.tag) {
+    case 'leaf':
+      return 1; 
+    case 'node':
+      return treeLength(tree.left) + treeLength(tree.right);
+    }
   }
-}
 
 // tree1: leaf
 //
@@ -34,3 +35,4 @@ const tree3: Tree = { tag: 'node', left: tree2, right: tree1 };
 // kilog :)
 const l2 = treeLength(tree2);
 console.log(l2); 
+

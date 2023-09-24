@@ -1,10 +1,10 @@
 // A treeLength függvény összeszámolja a leveleket
 function treeLength(tree) {
-    if (tree.tag === 'leaf') {
-        return 1;
-    }
-    else {
-        return treeLength(tree.left) + treeLength(tree.right);
+    switch (tree.tag) {
+        case 'leaf':
+            return 1;
+        case 'node':
+            return treeLength(tree.left) + treeLength(tree.right);
     }
 }
 // tree1: leaf
