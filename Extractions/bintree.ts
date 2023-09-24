@@ -1,4 +1,3 @@
-
 // Címke nélküli bináris fák típusa, "levélhossz" függvény
 //
 // TS-ben nincs induktív típus, de van olyan, hogy 
