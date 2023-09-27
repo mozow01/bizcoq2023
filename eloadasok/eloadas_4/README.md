@@ -1,4 +1,87 @@
 # Fák
+## Függvények fákon
+
+````coq
+Inductive binTree : Set :=
+  | leaf : binTree
+  | node : binTree -> binTree -> binTree.
+
+Fixpoint leafLength (t : binTree) {struct t} : nat :=
+  match t with
+  | leaf => 1
+  | node t1 t2 => (leafLength t1) + (leafLength t2)
+  end.
+
+Lemma leafLengthSound_1 : leafLength leaf = 1.
+Proof.
+simpl; auto.
+Qed.
+
+Lemma leafLengthSound_2 : forall t1 t2, leafLength (node t1 t2) = leafLength t1 + leafLength t2.
+Proof.
+induction t1, t2.
+all: simpl; auto.
+Qed.
+
+Fixpoint revertBinTree (t : binTree) {struct t} : binTree :=
+  match t with
+  | leaf => leaf
+  | node t1 t2 => node t2 t1
+  end.
+
+Theorem revertBinTreeSound : forall t, revertBinTree (revertBinTree t) = t.
+Proof.
+induction t.
+all: simpl; auto.
+Qed.
+
+Fixpoint mostRightAppend (t s : binTree) {struct t} : binTree :=
+  match t with 
+   | leaf => s
+   | node t1 t2 => node t1 (mostRightAppend t2 s)
+  end.
+
+Definition mostRightAppend_correct (t s result : binTree) : Prop :=
+  forall t1 t2, t = node t1 t2 ->
+  result = node t1 (mostRightAppend t2 s).
+
+Lemma mostRightAppend_correct_proof :
+  forall t s, mostRightAppend_correct t s (mostRightAppend t s).
+Proof.
+  intros t s.
+  induction t.
+  - (* leaf *)
+    unfold mostRightAppend_correct.
+    intros t1 t2 H.
+    inversion H. (* discriminate does it too *)
+  - (* node *)
+    unfold mostRightAppend_correct.
+    intros t1' t2' H.
+    (* inversion! subst! *)
+    inversion H. subst.
+    simpl.
+    reflexivity.
+Qed.
+
+Require Import Lia.
+
+Lemma Right_leafLength : forall t s, leafLength (mostRightAppend t s) + 1 = leafLength t + leafLength s.
+Proof.
+  intros t s.
+  induction t.
+  - (*  leaf *)
+    simpl. lia.
+  - (* node *)
+    simpl mostRightAppend.
+    simpl leafLength.
+    rewrite Arith_prebase.plus_assoc_reverse_stt.
+    rewrite Arith_prebase.plus_assoc_reverse_stt.
+    rewrite IHt2.
+    auto.
+    Search ( (_ + _) + _ = _ + (_ + _)).
+Qed.
+````
+## Fák, mint nyelv szintaxisa
 
 ````coq
 Inductive Exp : Set :=
@@ -65,5 +148,4 @@ auto.
 induction b.
 all: simpl; rewrite IHt1; rewrite IHt2; auto.
 Qed.
-````
 ````
