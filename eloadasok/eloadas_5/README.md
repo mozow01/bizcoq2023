@@ -66,7 +66,7 @@ induction b.
 all: simpl; rewrite IHt1; rewrite IHt2; auto.
 Qed.
 ````
-# Üres és egyeelemű típus
+# Üres és egyelemű típus
 
 ````coq
 Inductive False : Prop :=  .
