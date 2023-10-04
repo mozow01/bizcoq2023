@@ -119,6 +119,45 @@ end
      : forall P : Prop, False -> P
 ````
 
+# Pihenésként valószínűségi programozás
+
+````coq
+// A konstruktív és a klasszikus logika eltérése
+// a kognitív pszichológiában is egy érdekes jelenség. 
+// Kérdés pl., hogy az emberek melyik szerint gondolkodnak.
+//
+// 
+// "Érvényes-e az a következtetés, hogy
+//
+//  Ha Anna könyvtáros, akkor Anna balkezes.
+//  -----------------
+//  Anna vagy nem könyvtáros, vagy balkezes."
+//
+// Erre az alany igaz/hamis választ ad: ez egy Bernoulli-eloszlás.
+// Ha tudjuk, hogy mi egy csoport mit válaszolt, meg tudjuk-e mondani,
+// hogy milyen logika szerint döntöttek? 
+// A válasz egy Bayesiánus generatív gráfmodell. 
+
+const data_1 = [{data: false}, {data: true}, {data: false}, {data: false}, 
+                {data: true}];
+
+var model = function () {
+ 
+  var i = categorical({ps:[0.5,0.5],
+                            vs: ['const', 'class'] }); // hyperprior
+ 
+  var prior_1 = (i == 'const') ? beta({a: 1, b: 10}) : beta({a: 10, b: 1});
+  map(function(d){observe(Bernoulli({p: prior_1}), d.data)}, data_1);
+                  
+ 
+  return {melyik_modell_jo: i};
+};
+
+var output = Infer({method: 'MCMC', samples: 1000, lag: 100, burn: 5, model: model});
+
+viz.hist(output);
+````
+
 # Listák
 
 ````coq
