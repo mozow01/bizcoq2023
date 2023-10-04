@@ -2,19 +2,43 @@
 ## Függvények fákon
 
 ````coq
+Lemma drinker_dual : forall (U : Type) (P : U -> Prop),
+inhabited U -> ((exists x : U, P x) \/ (forall x : U, ~ P x))
+-> exists (x : U), (exists y : U, P y )-> P x.
+Proof.
+intros.
+elim H.
+intros.
+destruct H0 as [H1|H2].
+- inversion H1.
+  exists x.
+  intros.
+  exact H0.
+- exists X.
+  intros.
+  elim H0.
+  intros.
+  enough (K : ~ P x).
+  contradiction.
+  { (* exact (H2 X). *) specialize (H2 x). auto. } 
+  (* assert (K : ~ P x). 
+  { (* exact (H2 X). *) specialize (H2 x). auto. }
+  contradiction.*)
+Qed.
+
 Inductive binTree : Set :=
   | leaf : binTree
   | node : binTree -> binTree -> binTree.
 
 Fixpoint leafLength (t : binTree) {struct t} : nat :=
-  match t with
-  | leaf => 1
-  | node t1 t2 => (leafLength t1) + (leafLength t2)
+  match t with 
+    | leaf => 1
+    | node t1 t2 => (leafLength t1) + (leafLength t2)
   end.
 
 Lemma leafLengthSound_1 : leafLength leaf = 1.
 Proof.
-simpl; auto.
+simpl. auto.
 Qed.
 
 Lemma leafLengthSound_2 : forall t1 t2, leafLength (node t1 t2) = leafLength t1 + leafLength t2.
@@ -23,16 +47,17 @@ induction t1, t2.
 all: simpl; auto.
 Qed.
 
-Fixpoint revertBinTree (t : binTree) {struct t} : binTree :=
+Fixpoint revertBinTree (t : binTree) : binTree :=
   match t with
   | leaf => leaf
-  | node t1 t2 => node t2 t1
+  | node t1 t2 => node (revertBinTree t2) (revertBinTree t1)
   end.
 
 Theorem revertBinTreeSound : forall t, revertBinTree (revertBinTree t) = t.
 Proof.
 induction t.
-all: simpl; auto.
+- simpl. auto.
+- simpl. rewrite IHt2. rewrite IHt1. auto. 
 Qed.
 
 Fixpoint mostRightAppend (t s : binTree) {struct t} : binTree :=
@@ -53,12 +78,16 @@ Proof.
   - (* leaf *)
     unfold mostRightAppend_correct.
     intros t1 t2 H.
-    inversion H. (* discriminate does it too *)
+    discriminate H. (* discriminate does it too *)
   - (* node *)
     unfold mostRightAppend_correct.
     intros t1' t2' H.
     (* inversion! subst! *)
-    inversion H. subst.
+    inversion H. 
+    rewrite <- H.
+    rewrite <- H1.
+    rewrite <- H2.
+    (* subst. *)
     simpl.
     reflexivity.
 Qed.
@@ -74,78 +103,12 @@ Proof.
   - (* node *)
     simpl mostRightAppend.
     simpl leafLength.
+    Search ( (_ + _) + _ = _ + (_ + _)).
     rewrite Arith_prebase.plus_assoc_reverse_stt.
     rewrite Arith_prebase.plus_assoc_reverse_stt.
     rewrite IHt2.
     auto.
-    Search ( (_ + _) + _ = _ + (_ + _)).
+    (* Search ( (_ + _) + _ = _ + (_ + _)) . *)
 Qed.
 ````
-## Fák, mint nyelv szintaxisa
 
-````coq
-Inductive Exp : Set :=
-  | AT : nat -> Exp  
-  | NOT : Exp -> Exp
-  | AND : Exp -> Exp -> Exp 
-  | OR : Exp -> Exp -> Exp.
-
-Inductive UnOp : Set :=
-  | NOT_c : UnOp.
-
-Inductive BinOp : Set :=
-  | AND_c : BinOp
-  | OR_c : BinOp.
-
-Inductive AST : Set :=
-  | leaf : nat -> AST
-  | node1 : UnOp -> AST -> AST
-  | node2 : BinOp -> AST -> AST -> AST.
-
-Fixpoint ExpDenote (e : Exp) (v : nat -> bool ) {struct e} :=
-match e with 
-  | AT n => v n 
-  | NOT e1 => negb (ExpDenote e1 v)
-  | AND e1 e2 => andb (ExpDenote e1 v) (ExpDenote e2 v)
-  | OR e1 e2 => orb (ExpDenote e1 v) (ExpDenote e2 v)
-end.
-
-Fixpoint ASTDenote (t: AST) (v : nat -> bool ) {struct t} :=
-match t with
-  | leaf n => v n
-  | node1 _ t1 => negb (ASTDenote t1 v)
-  | node2 x t1 t2 => match x with
-           | AND_c => andb (ASTDenote t1 v) (ASTDenote t2 v)
-           | OR_c => orb (ASTDenote t1 v) (ASTDenote t2 v)
-                     end
-end.
-
-Fixpoint Translater1 (e : Exp) :=
-match e with
-  | AT n => leaf n 
-  | NOT e1 => node1 NOT_c (Translater1 e1)
-  | AND e1 e2 => node2 AND_c (Translater1 e1) (Translater1 e2)
-  | OR e1 e2 => node2 OR_c (Translater1 e1) (Translater1 e2)
-end.
-
-Fixpoint Translater2 (t : AST) :=
-match t with
-  | leaf n => AT n
-  | node1 _ t1 => NOT (Translater2 t1)
-  | node2 AND_c t1 t2 => AND (Translater2 t1) (Translater2 t2)
-  | node2 OR_c t1 t2 => OR (Translater2 t1) (Translater2 t2) 
-end.
-
-Theorem Soundness1 : forall t v, ASTDenote t v = ExpDenote (Translater2 t) v.
-Proof.
-intros.
-induction t.
-compute.
-auto.
-simpl.
-rewrite IHt.
-auto.
-induction b.
-all: simpl; rewrite IHt1; rewrite IHt2; auto.
-Qed.
-````
