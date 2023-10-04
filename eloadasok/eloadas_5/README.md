@@ -66,4 +66,25 @@ induction b.
 all: simpl; rewrite IHt1; rewrite IHt2; auto.
 Qed.
 ````
+# Üres és egyeelemű típus
+
+````coq
+Inductive False : Prop :=  .
+
+False_ind =
+fun (P : Prop) (f : False) =>
+match f return P with
+end
+     : forall P : Prop, False -> P
+
+Inductive True : Prop :=  I : True.
+
+False_ind =
+fun (P : Prop) (f : False) =>
+match f return P with
+end
+     : forall P : Prop, False -> P
+````
+
+# Listák
 
