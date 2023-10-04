@@ -121,7 +121,7 @@ end
 
 # Pihenésként valószínűségi programozás
 
-````coq
+````javascript
 // A konstruktív és a klasszikus logika eltérése
 // a kognitív pszichológiában is egy érdekes jelenség. 
 // Kérdés pl., hogy az emberek melyik szerint gondolkodnak.
