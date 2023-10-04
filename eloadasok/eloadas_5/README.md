@@ -125,36 +125,32 @@ end
 Require Import List.
 Import ListNotations.
 
-Fixpoint reverse {A : Type} (lst : list A) : list A :=
-  match lst with
+Print app.
+
+
+
+Fixpoint reverse {A : Type} (l : list A) : list A :=
+  match l with
   | [] => []
   | h :: t => (reverse t) ++ [h]
   end.
 
-
-(* Lemma 1: Reversing an empty list yields an empty list *)
-Lemma reverse_nil : forall (A : Type),
-  reverse (@nil A) = (@nil A).
+Lemma reverseApp : forall (A : Type) (x : A) (l : list A),
+  reverse (l ++ [x]) = x :: reverse l.
 Proof.
-  intros A. simpl. reflexivity.
-Qed.
-
-(* Lemma 2: Reversing a list and appending an element is the same as appending the element and reversing *)
-Lemma reverse_app : forall (A : Type) (x : A) (lst : list A),
-  reverse (lst ++ [x]) = x :: reverse lst.
-Proof.
-  intros A x lst. induction lst as [| h t IHt].
+  intros. 
+  induction l.
   - simpl. reflexivity.
-  - simpl. rewrite IHt. reflexivity.
+  - simpl. rewrite IHl. reflexivity.
 Qed.
 
-(* The main theorem: The reverse function is correct *)
-Theorem reverse_correct : forall (A : Type) (lst : list A),
-  reverse (reverse lst) = lst.
+Theorem reverseSound : forall (A : Type) (l : list A),
+  reverse (reverse l) = l.
 Proof.
-  intros A lst. induction lst as [| h t IHt].
-  - simpl. apply reverse_nil.
-  - simpl. rewrite reverse_app. rewrite IHt. reflexivity.
+  intros. 
+  induction l.
+  - simpl. auto.
+  - simpl. rewrite reverseApp. rewrite IHl. reflexivity.
 Qed.
 ````
 
