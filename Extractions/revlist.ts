@@ -13,7 +13,7 @@ function reverse<T>(l: List<T>): List<T> {
   }
 }
 
-// Define a helper function for appending an element to a list
+// Nincs neki app-ja, ezért csinálunk
 function app<T>(l: List<T>, m: List<T>): List<T> {
   switch (l.constructor) {
     case "nil":
@@ -24,12 +24,12 @@ function app<T>(l: List<T>, m: List<T>): List<T> {
   }
 }
 
-// Theorem: Reverse of reverse is the original list
+// ez a Correctness silány utánzata
 function reverseCorrect<T>(l: List<T>): boolean {
   return JSON.stringify(reverse(reverse(l))) === JSON.stringify(l);
 }
 
-// Test for the reverse function
+// tesztek
 const list1: List<number> = { constructor: "cons", head: 1, tail: { constructor: "cons", head: 2, tail: { constructor: "cons", head: 3, tail: { constructor: "nil" } } } };
 const reversedList1 = reverse(list1);
 
