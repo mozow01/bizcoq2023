@@ -5,7 +5,6 @@ Require Import List.
 (*Listák spéci beépített függvényekkel:*)
 Import ListNotations.
 
-
 (*Polimorf típus, akármik listája, de csak A-k listája*)
 Print list.
 (*Inductive list (A : Type) : Type :=
@@ -13,10 +12,8 @@ Print list.
   | cons : A -> list A -> list A.
 *)
 
-
 (*Vegyes lista csak úgy nem mükszik: 
 Definition m_l := true :: 3 :: nil *)
-
 
 (*Vegyes listához összegtípus kell:*)
 Inductive A_nat_bool : Set :=
@@ -68,7 +65,7 @@ Proof.
   induction l.
   - compute. reflexivity.
   - simpl. rewrite IHl. reflexivity.
-Qed.
+Defined.
 
 (*Lista tükrözés helyes, ha *)
 Theorem reverseCorrect : forall (A : Type) (l : list A),
@@ -78,7 +75,7 @@ Proof.
   induction l.
   - simpl. auto.
   - simpl. rewrite reverseApp. rewrite IHl. reflexivity.
-Qed.
+Defined.
 
 (*n magasságú fa, ami ugyanolyan magas ágakból áll*)
 Inductive hbTree : nat -> Set :=
@@ -124,7 +121,7 @@ induction t.
 - simpl.
   rewrite IHt1.
   lia.
-Qed.
+Defined.
 
 Fixpoint Height (n : nat) (t : HbTree n) : nat :=
   match t with
@@ -141,5 +138,5 @@ induction t.
   rewrite IHt1.
   rewrite IHt2.
   lia.
-Qed.
+Defined.
 ````
