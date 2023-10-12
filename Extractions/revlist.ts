@@ -19,8 +19,9 @@ function app<T>(l: List<T>, m: List<T>): List<T> {
     case "nil":
       return m;
     case "cons":
-      const { head, tail } = l;
-      return { constructor: "cons", head, tail: app(tail, m) };
+        const h = l.head;
+        const t = l.tail;
+      return { constructor: "cons", head : h, tail: app(t, m) };
   }
 }
 
