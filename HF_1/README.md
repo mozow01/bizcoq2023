@@ -56,6 +56,8 @@ inhabited U -> (exists x, forall y, P x y) -> (forall y, exists x, P x y).
 ````coq
 Require Import Relation_Definitions.
 
+(*P egy "halmaz", R egy kétváltozós reláció, amely rendezés: R x y (R : P -> P -> Prop), ezek együtt egy
+ rendezett struktúrát alkotnak, kiegészítve az axiómákkal. *)
 Class PartialOrder := PO_mk { 
     P : Type;
     R : relation P;
@@ -64,17 +66,19 @@ Class PartialOrder := PO_mk {
     PO_Antisymmetric : @antisymmetric P R;
   }.
 
-
+(*(@P T) a halmaz, aminek az elemei rendezve vannak a T rendezett struktúrában*)
 Inductive tree (T : PartialOrder) :=
   | leaf : (@P T) -> tree T
   | node : (@P T) -> tree T -> tree T -> tree T.
 
+(*Egy fa gyökerének értékei definíciója*)
 Definition value (T : PartialOrder) (t : tree T) : @P T :=
 match t with 
   | leaf _ a => a 
   | node _ a t1 t2 => a
 end. 
 
+(*Figyeljünk itt is arra, hogy a T rendezett struktúrában @R T hivatkozik a rendezésre.*)
 Definition isBST (T : PartialOrder) (t : tree T) : Prop :=
 match t with 
   | leaf _ _ => True
