@@ -2,7 +2,7 @@
 
 Határidő: nov. 7
 
-1. Elemezzük a következtő kódot, mit csinál a kövi program?
+1. a) Elemezzük a következtő kódot, mit csinál a kövi program?
 
 ````coq
 Fixpoint FuncBool (n : nat) :=
@@ -19,7 +19,7 @@ Fixpoint isAlwaysTrue (n : nat) : FuncBool n -> bool :=
   end.
 ````
 
-Folytassuk a helyességi bizonyítást n=2-re:
+b) Folytassuk a helyességi bizonyítást n=2-re:
 
 ````coq
 Lemma isAlwaysTrueIsCorrectFor2 : forall f, (forall b1 b2, f b1 b2 = true) -> isAlwaysTrue 2 f = true.
@@ -29,7 +29,7 @@ simpl.
 assert (H1 : f true true = true).
 Abort.
 ````
-Írjuk meg az "isNotAlwaysFalse (n)" függvényt és n=2-re igazoljuk a helyességét!
+c) Írjuk meg az "isNotAlwaysFalse (n)" függvényt és n=2-re igazoljuk a helyességét!
 
 2. 
 
