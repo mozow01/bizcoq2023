@@ -49,5 +49,5 @@ inhabited U -> ((exists x : U, P x) \/ ~ (exists x : U, P x))
 ````
 ````coq
 Lemma quant_2 : forall (U : Type) (P : U -> U -> Prop),
-inhabited U -> (exists x, forall y : P x y) -> (forall y, exists : P x y).
+inhabited U -> (exists x, forall y, P x y) -> (forall y, exists x, P x y).
 ````
