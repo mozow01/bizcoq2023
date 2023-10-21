@@ -33,10 +33,10 @@ c) Írjuk meg az "isNotAlwaysFalse (n)" függvényt és n=2-re igazoljuk a helye
 
 2. Bizonyítsd be Coq-ban és Lean3-ban (vagy Lean 4-ben)! Ha konstruktívan nem igaz, igazold klasszikus feltétellel!
    ````coq
-   forall A B C : Prop,  (~ A \/ B) -> A -> B.
+   forall A B : Prop,  (~ A \/ B) -> A -> B.
    ````
    ````coq
-   forall A B C : Prop,  A -> B -> (~ A \/ B).
+   forall A B : Prop,  A -> B -> (~ A \/ B).
    ````
    ````coq
    forall A B : Prop,  ((A -> B) -> A) -> A.
