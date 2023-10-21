@@ -81,4 +81,4 @@ match t with
   | node _ a t1 t2 => (@R T (value T t1) a) /\ (@R T a (value T t2))
 end.
 ````
-
+Bizonyítsunk be egy korrektségi tételt, azaz hogy ha egy t fa egy BST, akkor tényleg rendelkezik a megfelelő tulajdonsággal! 
