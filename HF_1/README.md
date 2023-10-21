@@ -1,6 +1,6 @@
 # Első házi példasor
 
-Határidő: nov. 7
+Határidő: nov. 6
 
 1. a) Elemezzük a következtő kódot, mit csinál a kövi program?
 
