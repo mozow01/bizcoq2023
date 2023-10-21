@@ -41,4 +41,13 @@ c) Írjuk meg az "isNotAlwaysFalse (n)" függvényt és n=2-re igazoljuk a helye
    ````coq
    forall A B : Prop,  ((A -> B) -> A) -> A.
    ````
-3. 
+3. Bizonyítsd be!
+````coq
+Lemma quant_1 : forall (U : Type) (P : U -> Prop),
+inhabited U -> ((exists x : U, P x) \/ ~ (exists x : U, P x))
+-> ~ (forall x : U, ~ P x) -> (exists x : U, P x).
+````
+````coq
+Lemma quant_2 : forall (U : Type) (P : U -> U -> Prop),
+inhabited U -> (exists x, forall y : P x y) -> (forall y, exists : P x y).
+````
