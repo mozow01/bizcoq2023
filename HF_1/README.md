@@ -51,7 +51,7 @@ inhabited U -> ((exists x : U, P x) \/ ~ (exists x : U, P x))
 Lemma quant_2 : forall (U : Type) (P : U -> U -> Prop),
 inhabited U -> (exists x, forall y, P x y) -> (forall y, exists x, P x y).
 ````
-4. Olvassunk egy kicsit utána, mit csinál a típusosztályt (egyszerre több típust) definiáló Class típus. @ a rejtette olsztályváltozót előhozó parancs, pl. ha T egy parciális rendezés, P a típus, amelynek az elemei rendezve vannak és R a rendezés, akkor @P T -vel hivatkozunk az rendezett elemek típusára, @R T -val a rendezésre. Olvassuk el, mit jelnet Binary Search Tree-nek lenni:
+4. Olvassunk egy kicsit utána, mit csinál a típusosztályt (egyszerre több típust) definiáló Class parancs. @ a rejtett olsztályváltozót előhozó parancs, pl. ha T egy parciális rendezés, P a típus, amelynek az elemei rendezve vannak és R a rendezés, akkor @P T -vel hivatkozunk az rendezett elemek típusára, @R T -val a rendezésre. Olvassuk el, mit jelnet Binary Search Tree-nek lenni:
 
 ````coq
 Require Import Relation_Definitions.
