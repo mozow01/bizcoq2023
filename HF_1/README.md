@@ -32,30 +32,36 @@ Abort.
 c) Írjuk meg az "isNotAlwaysFalse (n)" függvényt és n=2-re igazoljuk a helyességét!
 
 2. Bizonyítsd be Coq-ban és Lean3-ban (vagy Lean 4-ben)! Ha konstruktívan nem igaz, igazold klasszikus feltétellel!
-  a)
+
+a)
    ````coq
    forall A B : Prop,  (~ A \/ B) -> A -> B.
    ````
-  b)
+
+b)
    ````coq
    forall A B : Prop,  A -> B -> (~ A \/ B).
    ````
-  c)
+
+c)
    ````coq
    forall A B : Prop,  ((A -> B) -> A) -> A.
    ````
 4. Bizonyítsd be!
-  a)
+
+a)
 ````coq
 Lemma quant_1 : forall (U : Type) (P : U -> Prop),
 inhabited U -> ((exists x : U, P x) \/ ~ (exists x : U, P x))
 -> ~ (forall x : U, ~ P x) -> (exists x : U, P x).
 ````
-  b)
+
+b)
 ````coq
 Lemma quant_2 : forall (U : Type) (P : U -> U -> Prop),
 inhabited U -> (exists x, forall y, P x y) -> (forall y, exists x, P x y).
 ````
+
 4. Olvassunk egy kicsit utána, mit csinál a típusosztályt (egyszerre több típust) definiáló Class parancs. @ a rejtett olsztályváltozót előhozó parancs, pl. ha T egy parciális rendezés, P a típus, amelynek az elemei rendezve vannak és R a rendezés, akkor @P T -vel hivatkozunk az rendezett elemek típusára, @R T -val a rendezésre. Olvassuk el, mit jelnet Binary Search Tree-nek lenni:
 
 ````coq
@@ -93,12 +99,17 @@ end.
 Bizonyítsunk be egy korrektségi tételt, azaz hogy ha egy t fa egy BST, akkor tényleg rendelkezik a megfelelő tulajdonsággal! 
 
 5.
-   a) Definiáljuk az előző bináris fa típusú fák tükörképét. Igazoljuk, hogy egy isBST fa tükörképe olyan, ahol a relációk iránya rendre megváltozik.
-   b) Definiáljuk nat értékű fákra is ezeket és igazoljuk a tételt ott is.
-   c) Ez utóbbit készítsük el TypeScript-ben is.
+
+a) Definiáljuk az előző bináris fa típusú fák tükörképét. Igazoljuk, hogy egy isBST fa tükörképe olyan, ahol a relációk iránya rendre megváltozik.
+
+b) Definiáljuk nat értékű fákra is ezeket és igazoljuk a tételt ott is.
+
+c) Ez utóbbit készítsük el TypeScript-ben is.
   
-   (*) Ha tudjuk, igazoljuk, hogy nat a kisebb egyenlő relációval PartialOrder.
+(*) Ha tudjuk, igazoljuk, hogy nat a kisebb egyenlő relációval PartialOrder.
 
 6.
-   a) Defíniáljuk az n hosszúságú listák típusát (vektorok)! Igazoljuk, hogy egy n hosszúságú lista hossza n.
-   b) Definiáljuk egy n hosszúságú lista tüktözését és igazoljuk, hogy a definíció jó.
+
+a) Defíniáljuk az n hosszúságú listák típusát (vektorok)! Igazoljuk, hogy egy n hosszúságú lista hossza n.
+
+b) Definiáljuk egy n hosszúságú lista tüktözését és igazoljuk, hogy a definíció jó.
