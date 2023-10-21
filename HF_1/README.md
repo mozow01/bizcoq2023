@@ -86,3 +86,9 @@ match t with
 end.
 ````
 Bizonyítsunk be egy korrektségi tételt, azaz hogy ha egy t fa egy BST, akkor tényleg rendelkezik a megfelelő tulajdonsággal! 
+
+5. Definiáljuk az előző bináris fa típusú fák tükörképét. Igazoljuk, hogy egy isBST fa tükörképe olyan, ahol a relációk iránya rendre megváltozik. Defininiáljuk nat értékű fákra is ezeket és igazoljuk a tételt ott is.
+
+   (*) Ha tudjuk, igazoljuk, hogy nat a kisebb egyenlő relációval PartialOrder.
+
+6. Defíniáljuk az n hosszúságú listák típusát (vektorok)! Igazoljuk, hogy egy n hosszúságú lista hossza n. Definiáljuk egy n hosszúságú lista tüktözését és igazoljuk, hogy a definíció jó.
