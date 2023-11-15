@@ -35,8 +35,7 @@ Definition inve x :=
   | b => a
   end.
   ````
-  
-  Most belecsapunk a lecsóba és egy vegyes típust definiálunk egy Record-dal vagy Structure-rel:
+  Structure 
   
   ````coq
   Structure Group : Type := const_kozos
@@ -74,8 +73,7 @@ Proof.
 Defined.
 ````
 ````coq
-(*A morfizmusok őshonos állatfajok a típuselméletben, 
-így a csoportok közötti G->H művelettartó leképezések is *)
+(*Morfizmusok*)
 
 Definition GroupMorphism (G:Group) (H:Group) (f:G->H) : Prop :=  
     f(z G)=z H /\
